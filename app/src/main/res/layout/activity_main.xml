@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/easy_menu_button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/difficulty_easy"
+        android:textSize="30sp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toTopOf="@+id/hard_menu_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/hard_menu_button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/difficulty_hard"
+        android:textSize="30sp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toTopOf="@+id/ranking_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/easy_menu_button" />
+
+    <Button
+        android:id="@+id/ranking_button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/ranking"
+        android:textSize="30sp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hard_menu_button" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="60sp"
+        android:textColor="#ff669900"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/easy_menu_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="60dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
