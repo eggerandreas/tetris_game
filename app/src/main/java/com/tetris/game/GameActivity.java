@@ -4,33 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DrawView drawView;
-    GameState gameState;
-    RelativeLayout gameButtons;
-    Button left;
-    Button right;
-    Button rotateAc;
-    FrameLayout game;
-    Button pause;
-    TextView score;
-    Handler handler;
-    Runnable loop;
-    int delayFactor;
-    int delay;
-    int delayLowerLimit;
-    Intent i;
-    int tempScore;
+    public static GameState gameState = new GameState(24, 20, TetrisFigureType.getRandomTetrisFigure());
+    private TetrisView tetrisView;
+    private Button left;
+    private Button right;
+    private Button turn;
+    private Button pause;
+    private TextView score;
+    private Handler handler;
+    private Runnable loop;
+    private int delayFactor;
+    private int delay;
+    private int delayLowerLimit;
+    private int tempScore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +34,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 
         tempScore = 0;
-        gameState = new GameState(24, 20, TetrisFigureType.getRandomTetrisFigure());
 
-        drawView = new DrawView(this, gameState);
-        drawView.setBackgroundColor(Color.WHITE);
+        // config the used views
+        tetrisView = findViewById(R.id.tetris_view);
+        left = findViewById(R.id.button_left);
+        turn = findViewById(R.id.button_turn);
+        right = findViewById(R.id.button_right);
+        pause = findViewById(R.id.button_pause);
+        score = findViewById(R.id.game_score);
 
-        game = new FrameLayout(this);
-        gameButtons = new RelativeLayout(this);
-
-
+        // set onclicklisteners
+        left.setOnClickListener(this);
+        turn.setOnClickListener(this);
+        right.setOnClickListener(this);
+        pause.setOnClickListener(this);
 
         delay = 500;
         delayLowerLimit = 200;
@@ -64,88 +65,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             delay = delay * delayFactor;
             gameState.difficultMode = false;
         }
-
-
-
-        // create the used Buttons
-        left = new Button(this);
-        left.setText(R.string.left);
-        left.setId(R.id.left);
-
-        right = new Button(this);
-        right.setText(R.string.right);
-        right.setId(R.id.right);
-
-        rotateAc = new Button(this);
-        rotateAc.setText(R.string.rotate_ac);
-        rotateAc.setId(R.id.rotate_ac);
-
-        pause = new Button(this);
-        pause.setText(R.string.pause);
-        pause.setId(R.id.pause);
-
-        score = new TextView(this);
-        score.setText(R.string.score);
-        score.setId(R.id.score);
-        score.setTextSize(20);
-
-
-        // create the Layouts
-        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams leftButton = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams rightButton = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams downButton = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams pausebutton = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams scoretext = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        // set and add the layouts / views
-        gameButtons.setLayoutParams(rl);
-        gameButtons.addView(left);
-        gameButtons.addView(right);
-        gameButtons.addView(rotateAc);
-        gameButtons.addView(pause);
-        gameButtons.addView(score);
-
-        // add some Rules
-        leftButton.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-        leftButton.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-
-        rightButton.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-        rightButton.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-
-        downButton.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        downButton.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-
-        pausebutton.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-        pausebutton.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-
-        scoretext.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-        scoretext.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-
-        left.setLayoutParams(leftButton);
-        right.setLayoutParams(rightButton);
-        rotateAc.setLayoutParams(downButton);
-        pause.setLayoutParams(pausebutton);
-        score.setLayoutParams(scoretext);
-
-        game.addView(drawView);
-        game.addView(gameButtons);
-        setContentView(game);
-
-        View leftButtonListener = findViewById(R.id.left);
-        leftButtonListener.setOnClickListener(this);
-
-        View rightButtonListener = findViewById(R.id.right);
-        rightButtonListener.setOnClickListener(this);
-
-        View rotateACButtonListener = findViewById(R.id.rotate_ac);
-        rotateACButtonListener.setOnClickListener(this);
-
-        View pauseButtonListener = findViewById(R.id.pause);
-        pauseButtonListener.setOnClickListener(this);
-
-
-
+        
         handler = new Handler(Looper.getMainLooper());
         loop = new Runnable() {
             public void run() {
@@ -162,10 +82,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                                 delay = delay / delayFactor + 1;
                             }
                             gameState.incrementScore();
+
+                            // update score
                             ++tempScore;
+                            String stringScore = Integer.toString(gameState.score);
+                            score.setText(stringScore);
+
 
                         }
-                        drawView.invalidate();
+                        tetrisView.invalidate();
                     }
                     handler.postDelayed(this, delay);
                 } else {
@@ -187,6 +112,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         };
         loop.run();
+
     }
 
 
@@ -198,7 +124,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         } else if (action == right) {
             gameState.moveFallingTetrisFigureRight();
 
-        } else if (action == rotateAc) {
+        } else if (action == turn) {
             gameState.rotateFallingTetrisFigureAntiClock();
 
         } else if (action == pause) {

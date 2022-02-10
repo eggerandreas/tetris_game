@@ -4,20 +4,25 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.view.View;
 
-public class DrawView extends View {
-    int yOffset;
-    Paint paint;
-    GameState gameState;
+import androidx.annotation.Nullable;
 
-    public DrawView(Context context, final GameState gameState) {
-        super(context);
+public class TetrisView extends View {
+
+    private int yOffset;
+    private Paint paint;
+    private GameState gameState;
+
+    public TetrisView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
         paint = new Paint();
         paint.setColor(Color.BLUE);
-        yOffset = 200;
-        this.gameState = gameState;
+        yOffset = 10;
+        gameState = GameActivity.gameState;
     }
+
 
     // set the tetris block colors
     private int getBlockColorCode(int color) {
@@ -101,6 +106,7 @@ public class DrawView extends View {
     }
 
     // this function print the game score
+/*
     private void PrintScore(int score, Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Color.TRANSPARENT);
@@ -111,18 +117,23 @@ public class DrawView extends View {
 
     }
 
+ */
+
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5f);
         Boundary(canvas);
         grid(canvas);
+
+
         if (gameState.status) {
             Clear(gameState.board, canvas);
             DrawMatrix(gameState.board, canvas);
             DrawTetrisFigure(gameState.falling, canvas);
-            PrintScore(gameState.score, canvas);
         } else {
             Paint paint = new Paint();
             DrawMatrix(gameState.board, canvas);
@@ -130,9 +141,9 @@ public class DrawView extends View {
             paint.setColor(Color.BLACK);
             paint.setTextSize(200);
             canvas.drawText(getResources().getString(R.string.game_over), 45, 800, paint);
-            PrintScore(gameState.score, canvas);
         }
 
     }
 
 }
+
