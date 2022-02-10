@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.easy_menu_button).setOnClickListener(this);
         findViewById(R.id.hard_menu_button).setOnClickListener(this);
         findViewById(R.id.ranking_button).setOnClickListener(view -> {
-            Intent intent = new Intent(this, RankingActivity.class);
-            startActivity(intent);
+            Intent AccessRanking = new Intent(this, RankingActivity.class);
+            startActivity(AccessRanking);
         });
     }
 
