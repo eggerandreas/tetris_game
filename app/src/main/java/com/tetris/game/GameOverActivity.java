@@ -17,7 +17,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
     protected AppDatabase db;
     protected TextInputEditText name;
     protected Highscore highscore;
-    protected String ranking;
+    protected int ranking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,11 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
 
         db = DatabaseUtils.getAppDatabase(this.getApplicationContext());
 
-        // String score = getIntent().getIntExtra("hallo", GameActivity.tempScore);
-        //TextView GameOverTxt = (TextView) findViewById(R.id.score);
-        //GameOverTxt.setText("YOUR SCORE: " + tempScore);
-        //ranking = score;
-        //findViewById(R.id.button_save).setOnClickListener(this);
+        int score = getIntent().getIntExtra("hallo", 0);
+        TextView GameOverTxt = (TextView) findViewById(R.id.score);
+        GameOverTxt.setText("YOUR SCORE: " + score);
+        ranking = score;
+        findViewById(R.id.button_save).setOnClickListener(this);
 
 
     }
