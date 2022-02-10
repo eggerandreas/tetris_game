@@ -9,7 +9,7 @@ public class Highscore {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public String name;
-    public String score;
+    public int score;
 
     public int getId() {
         return id;
@@ -27,11 +27,11 @@ public class Highscore {
         this.name = name;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
