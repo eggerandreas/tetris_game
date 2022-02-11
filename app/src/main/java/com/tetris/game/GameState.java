@@ -16,7 +16,6 @@ public class GameState {
     private Integer ctr;
     private SparseArray<TetrisFigure> tetrisFigure;
 
-
     GameState(int rows, int columns, TetrisFigureType fallingTetrisFigureType) {
 
         this.rows = rows;
@@ -282,5 +281,28 @@ public class GameState {
         }
 
         return false;
+    }
+
+    public void reset(){
+        this.rows = 24;
+        this.columns = 20;
+        this.pause = false;
+        ctr = 0;
+        score = 0;
+        this.status = true;
+        difficultMode = false;
+
+        board = new SimpleBlock[rows][columns];
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                board[row][column] = new SimpleBlock(row, column);
+            }
+        }
+
+        tetrisFigure = new SparseArray<>();
+
+        falling = new TetrisFigure(TetrisFigureType.getRandomTetrisFigure(), this.ctr);
+
+        tetrisFigure.put(this.ctr, falling);
     }
 }

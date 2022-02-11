@@ -13,14 +13,14 @@ public class TetrisView extends View {
 
     private int yOffset;
     private Paint paint;
-    private GameState gameState;
+    public GameState gameState = GameActivity.gameState;
+
 
     public TetrisView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
         paint.setColor(Color.BLUE);
         yOffset = 10;
-        gameState = GameActivity.gameState;
     }
 
 
@@ -108,6 +108,7 @@ public class TetrisView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
 
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5f);

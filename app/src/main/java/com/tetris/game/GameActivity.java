@@ -18,7 +18,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     public static GameState gameState = new GameState(24, 20, TetrisFigureType.getRandomTetrisFigure());
     private TetrisView tetrisView;
@@ -42,6 +47,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 
 
+        // reset view / gamestate after restart in order to play again
+        gameState.reset();
+
         // hide Action Bar
         getSupportActionBar().hide();
 
@@ -50,6 +58,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         // config the used views
         tetrisView = findViewById(R.id.tetris_view);
+
 
         // button move left
         left = findViewById(R.id.button_left);
@@ -137,24 +146,30 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
                         }
-                        tetrisView.invalidate();
+                       tetrisView.invalidate();
                     }
                     handler.postDelayed(this, delay);
                 } else {
 
-                    // alert when game over
+
+                   // alert when game over
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameActivity.this);
                     alertDialogBuilder.setTitle("Game Over");
                     alertDialogBuilder.setIcon(R.drawable.ic_game_over);
                     alertDialogBuilder.setMessage("You made a good game!");
                     alertDialogBuilder.setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
 
+
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
+
                             Intent i = new Intent(getBaseContext(), GameOverActivity.class);
                             i.putExtra("hallo", tempScore);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
-                        }
+                            finish();
+
+                  }
                     });
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
@@ -168,6 +183,36 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        gameState.status = true;
+        gameState.pause = false;
+        tetrisView.invalidate();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameState.status = true;
+        gameState.pause = false;
+        tetrisView.invalidate();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameState.status = true;
+        gameState.pause = false;
+        tetrisView.invalidate();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 
     @Override
     public void onClick(View action) {
