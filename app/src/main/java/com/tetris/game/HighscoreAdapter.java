@@ -16,6 +16,7 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
 
         public HighscoreViewHolder(@NonNull View itemView) {
             super(itemView);
+
             name = itemView.findViewById(R.id.list_name);
             score = itemView.findViewById(R.id.list_score);
         }
@@ -36,17 +37,17 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
     @NonNull
     @Override
     public HighscoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater
+        View itemView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.highscore, parent, false);
-        return new HighscoreViewHolder(view);
+                .inflate(R.layout.highscore_item, parent, false);
+        return new HighscoreViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HighscoreViewHolder holder, int position) {
         Highscore highscore = highscoreList.get(position);
-        holder.name.setText(highscore.name);
-        holder.score.setText(highscore.score);
+        holder.name.setText(highscore.getName());
+        holder.score.setText(String.valueOf(highscore.getScore()));
     }
 
     @Override
@@ -55,4 +56,3 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
     }
 
 }
-
