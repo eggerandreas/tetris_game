@@ -167,22 +167,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     alertDialogBuilder.setMessage("You made a good game!");
                     alertDialogBuilder.setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
 
-<<<<<<< HEAD
-
-=======
                         @RequiresApi(api = Build.VERSION_CODES.O)
->>>>>>> 50a27e6744078ebfb182eccb3d1432f11964f524
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
 
                             Intent i = new Intent(getBaseContext(), GameOverActivity.class);
                             i.putExtra("hallo", tempScore);
-<<<<<<< HEAD
+
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-=======
+
                             tetris_sound.stop();
                             tetris_sound.release();
->>>>>>> 50a27e6744078ebfb182eccb3d1432f11964f524
+
                             startActivity(i);
                             finish();
 
