@@ -1,5 +1,6 @@
 package com.tetris.game;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
@@ -38,6 +41,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int delay;
     private int delayLowerLimit;
     private int tempScore;
+    MediaPlayer tetris_sound;
 
 
     @SuppressLint("ResourceAsColor")
@@ -46,6 +50,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        tetris_sound= MediaPlayer.create(GameActivity.this, R.raw.tetris);
+        tetris_sound.setLooping(true); // Set looping
+        tetris_sound.setVolume(100, 100);
+        tetris_sound.start();
 
         // reset view / gamestate after restart in order to play again
         gameState.reset();
@@ -159,13 +167,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     alertDialogBuilder.setMessage("You made a good game!");
                     alertDialogBuilder.setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
 
+<<<<<<< HEAD
 
+=======
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+>>>>>>> 50a27e6744078ebfb182eccb3d1432f11964f524
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
 
                             Intent i = new Intent(getBaseContext(), GameOverActivity.class);
                             i.putExtra("hallo", tempScore);
+<<<<<<< HEAD
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+=======
+                            tetris_sound.stop();
+                            tetris_sound.release();
+>>>>>>> 50a27e6744078ebfb182eccb3d1432f11964f524
                             startActivity(i);
                             finish();
 
@@ -236,10 +253,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 if (gameState.pause) {
                     gameState.pause = false;
                     pause.setText(R.string.pause);
+                    tetris_sound.start();
 
                 } else {
                     pause.setText(R.string.play);
                     gameState.pause = true;
+                    tetris_sound.pause();
 
                 }
             }

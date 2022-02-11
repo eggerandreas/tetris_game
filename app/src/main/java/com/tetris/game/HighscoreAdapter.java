@@ -31,6 +31,7 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
 
     public void reload() {
         this.highscoreList = dao.getAllHighscores();
+        dao.removeRemainingHighscores();
         this.notifyDataSetChanged();
     }
 

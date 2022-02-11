@@ -19,6 +19,9 @@ public interface HighscoreDao {
     @Delete
     public void remove(Highscore highscore);
 
+    @Query("DELETE FROM Highscore WHERE score NOT IN (SELECT DISTINCT score FROM Highscore ORDER BY score DESC LIMIT 5)")
+    public void removeRemainingHighscores();
+
     @Query("SELECT * FROM Highscore ORDER BY score DESC LIMIT 5")
     public List<Highscore> getAllHighscores();
 
