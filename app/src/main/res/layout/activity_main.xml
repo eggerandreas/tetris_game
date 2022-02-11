@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <Button
@@ -11,21 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="@string/difficulty_easy"
-        android:textSize="30sp"
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/hard_menu_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65999997"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ENTER YOUR MODE AND PLAY!"
+        android:textColor="@color/wave"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/easy_menu_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_name"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/hard_menu_button"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="@string/difficulty_hard"
-        android:textSize="30sp"
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/ranking_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="@string/ranking"
-        android:textSize="30sp"
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +59,15 @@
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
         android:text="@string/app_name"
-        android:textSize="60sp"
-        android:textColor="#ff669900"
+        android:textColor="@color/deep_aqua"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/easy_menu_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="60dp"/>
+        app:layout_constraintVertical_bias="0.90999997" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

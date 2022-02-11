@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42000002"
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/game_over"
-            android:textColor="#ff669900"
+            android:textColor="@color/deep_aqua"
             android:textSize="60sp"
             android:textStyle="bold" />
 
@@ -31,9 +32,9 @@
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/wave"
             android:layout_gravity="center"
             android:text="@string/score"
-            android:textColor="#ff669900"
             android:textSize="30sp" />
 
 
@@ -42,19 +43,16 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#ff669900"
-            android:textColorHint="#ff669900">
+            android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/enter_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:hint="Enter Name"
-                android:textColor="#ff669900"
-                android:textColorHint="#ff669900"
-                android:textSize="25sp"
+                android:layout_margin="5dp"
+                android:hint="  Enter Name"
+                android:textColor="@color/deep_aqua"
+                android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,11 +72,10 @@
         <Button
             android:id="@+id/button_donot_save"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_weight=".50"
+            android:layout_height="60sp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
             android:text="@string/donotsave"
-            android:backgroundTint="@android:color/holo_green_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,11 +84,10 @@
         <Button
             android:id="@+id/button_save"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
+            android:layout_height="60sp"
+            android:layout_margin="3dp"
             android:text="@string/save"
-            android:layout_weight=".50"
-            android:backgroundTint="@android:color/holo_green_dark"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

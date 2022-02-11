@@ -174,18 +174,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                             Intent i = new Intent(getBaseContext(), GameOverActivity.class);
                             i.putExtra("hallo", tempScore);
 
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                             tetris_sound.stop();
                             tetris_sound.release();
 
                             startActivity(i);
-                            finish();
 
                   }
                     });
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
+                    AlertDialog alert = alertDialogBuilder.create();
+                    alert.setCanceledOnTouchOutside(false);
+                    alert.show();
 
                 }
             }

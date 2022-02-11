@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // hide Action Bar
+        getSupportActionBar().hide();
+
         findViewById(R.id.easy_menu_button).setOnClickListener(this);
         findViewById(R.id.hard_menu_button).setOnClickListener(this);
         findViewById(R.id.ranking_button).setOnClickListener(view -> {
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         Intent StartGame = new Intent(this, GameActivity.class);
+
+        // do not add to the stack history
+        StartGame.setFlags(StartGame.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         StartGame.putExtra("difficulty", difficulty);
         startActivity(StartGame);
     }

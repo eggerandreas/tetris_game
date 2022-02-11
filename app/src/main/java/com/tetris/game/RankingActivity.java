@@ -21,30 +21,14 @@ public class RankingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
+        getSupportActionBar().setTitle("Highscores");
+
         db = DatabaseUtils.getAppDatabase(this.getApplicationContext());
         adapter = new HighscoreAdapter(db.getHighscoreDao());
 
         RecyclerView list = findViewById(R.id.score_list);
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.go_back, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.go_back:
-                Intent i = new Intent(this,MainActivity.class);
-                this.startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
