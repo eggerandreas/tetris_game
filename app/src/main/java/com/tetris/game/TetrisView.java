@@ -105,21 +105,6 @@ public class TetrisView extends View {
         }
     }
 
-    // this function print the game score
-/*
-    private void PrintScore(int score, Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Color.TRANSPARENT);
-        canvas.drawRect(0, 100, 200, 200, paint);
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(100);
-        canvas.drawText(Integer.toString(score), 80, 170, paint);
-
-    }
-
- */
-
-
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);

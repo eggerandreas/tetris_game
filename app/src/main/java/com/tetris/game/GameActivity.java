@@ -1,7 +1,11 @@
 package com.tetris.game;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
@@ -9,15 +13,16 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static GameState gameState = new GameState(24, 20, TetrisFigureType.getRandomTetrisFigure());
     private TetrisView tetrisView;
-    private Button left;
-    private Button right;
-    private Button turn;
+    private ImageButton left;
+    private ImageButton right;
+    private ImageButton turn;
     private Button pause;
     private TextView score;
     private Handler handler;
@@ -28,20 +33,60 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int tempScore;
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+
+        // hide Action Bar
+        getSupportActionBar().hide();
+
+        // score for intent to GameOver activity
         tempScore = 0;
 
         // config the used views
         tetrisView = findViewById(R.id.tetris_view);
+
+        // button move left
         left = findViewById(R.id.button_left);
+
+        // button turn
         turn = findViewById(R.id.button_turn);
+
+        // button turn right
         right = findViewById(R.id.button_right);
+
         pause = findViewById(R.id.button_pause);
         score = findViewById(R.id.game_score);
+
+
+        // set dark / light mode colors to image buttons
+        int nightModeFlags =
+                getApplicationContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                left.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.wave));
+                right.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.wave));
+                turn.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.wave));
+                pause.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.ocean));
+                pause.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.wave));
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+
+                left.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.deep_aqua));
+                right.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.deep_aqua));
+                turn.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.deep_aqua));
+                pause.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.wave));
+                pause.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+
+            default:
+                break;
+        }
+
 
         // set onclicklisteners
         left.setOnClickListener(this);
@@ -119,12 +164,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View action) {
         if (action == left) {
+
+            // change color when click
             gameState.moveFallingTetrisFigureLeft();
 
         } else if (action == right) {
+
+            // change color when click
             gameState.moveFallingTetrisFigureRight();
 
         } else if (action == turn) {
+
+            // change color when click
             gameState.rotateFallingTetrisFigureAntiClock();
 
         } else if (action == pause) {

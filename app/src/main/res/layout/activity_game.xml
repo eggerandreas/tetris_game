@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/score_description"
@@ -51,30 +51,32 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_left"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="@string/left" />
+            app:srcCompat="@drawable/ic_arrow_left"
+            android:backgroundTint="@color/deep_aqua"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_turn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Turn
-" />
+            android:backgroundTint="@color/deep_aqua"
+            app:srcCompat="@drawable/ic_arrow_turn"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="right" />
+            app:srcCompat="@drawable/ic_arrow_right"
+            android:backgroundTint="@color/deep_aqua"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
 </LinearLayout>
