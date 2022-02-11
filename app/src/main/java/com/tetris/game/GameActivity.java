@@ -197,37 +197,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        gameState.status = true;
-        gameState.pause = false;
-        tetrisView.invalidate();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        gameState.status = true;
-        gameState.pause = false;
-        tetrisView.invalidate();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameState.status = true;
-        gameState.pause = false;
-        tetrisView.invalidate();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
-    }
-
-    @Override
     public void onClick(View action) {
         if (action == left) {
 
