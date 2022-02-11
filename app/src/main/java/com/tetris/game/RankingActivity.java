@@ -24,7 +24,7 @@ public class RankingActivity extends AppCompatActivity {
         db = DatabaseUtils.getAppDatabase(this.getApplicationContext());
         adapter = new HighscoreAdapter(db.getHighscoreDao());
 
-        RecyclerView list = findViewById(R.id.task_list);
+        RecyclerView list = findViewById(R.id.score_list);
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));
     }

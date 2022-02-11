@@ -19,7 +19,7 @@ public interface HighscoreDao {
     @Delete
     public void remove(Highscore highscore);
 
-    @Query("SELECT * FROM Highscore")
+    @Query("SELECT * FROM Highscore ORDER BY score DESC LIMIT 5")
     public List<Highscore> getAllHighscores();
 
 }

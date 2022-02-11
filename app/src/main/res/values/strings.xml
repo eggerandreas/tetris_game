@@ -16,4 +16,5 @@
     <string name="score">YOUR SCORE: </string>
     <string name="highscores">HIGHSCORES</string>
     <string name="ranking_list">RANKING LIST</string>
+    <string name="donotsave">DON\'T SAVE</string>
 </resources>

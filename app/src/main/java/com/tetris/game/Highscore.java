@@ -2,14 +2,14 @@ package com.tetris.game;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import java.time.LocalDateTime;
 
 @Entity
 public class Highscore {
+
     @PrimaryKey(autoGenerate = true)
-    public int id;
-    public String name;
-    public int score;
+    protected int id;
+    protected String name;
+    protected int score;
 
     public int getId() {
         return id;
