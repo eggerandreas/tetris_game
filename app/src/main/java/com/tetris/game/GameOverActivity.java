@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -43,9 +45,12 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         highscore.name = name.getText().toString();
         highscore.score = ranking;
 
-        db.getHighscoreDao().insertScore(highscore);
-
-        Intent BackToMenu = new Intent(this, MainActivity.class);
-        startActivity(BackToMenu);
+        if (!(highscore.name.isEmpty())) {
+            db.getHighscoreDao().insertScore(highscore);
+            Intent BackToMenu = new Intent(this, MainActivity.class);
+            startActivity(BackToMenu);
+        } else {
+            Toast.makeText(getApplicationContext(), "Please make sure you filled in your name", Toast.LENGTH_SHORT).show();
+        }
     }
 }
