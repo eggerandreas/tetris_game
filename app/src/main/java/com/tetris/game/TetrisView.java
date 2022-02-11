@@ -40,7 +40,7 @@ public class TetrisView extends View {
             case 6:
                 return Color.MAGENTA;
             case 7:
-                return Color.DKGRAY;
+                return Color.GRAY;
             default:
                 return Color.TRANSPARENT;
         }
@@ -120,12 +120,8 @@ public class TetrisView extends View {
             DrawMatrix(gameState.board, canvas);
             DrawTetrisFigure(gameState.falling, canvas);
         } else {
-            Paint paint = new Paint();
             DrawMatrix(gameState.board, canvas);
             DrawTetrisFigure(gameState.falling, canvas);
-            paint.setColor(Color.BLACK);
-            paint.setTextSize(200);
-            canvas.drawText(getResources().getString(R.string.game_over), 45, 800, paint);
         }
 
     }

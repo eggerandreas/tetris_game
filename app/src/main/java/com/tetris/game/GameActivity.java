@@ -1,9 +1,11 @@
 package com.tetris.game;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -62,7 +64,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         score = findViewById(R.id.game_score);
 
 
-        // set dark / light mode colors to image buttons
+        // set dark / light mode colors to buttons
         int nightModeFlags =
                 getApplicationContext().getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;
@@ -140,17 +142,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     handler.postDelayed(this, delay);
                 } else {
 
-                    // set some delay
-                    handler.postDelayed(new Runnable() {
+                    // alert when game over
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameActivity.this);
+                    alertDialogBuilder.setTitle("Game Over");
+                    alertDialogBuilder.setIcon(R.drawable.ic_game_over);
+                    alertDialogBuilder.setMessage("You made a good game!");
+                    alertDialogBuilder.setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
+
                         @Override
-                        public void run() {
-                            // intent with score value to game over activity
+                        public void onClick(DialogInterface arg0, int arg1) {
                             Intent i = new Intent(getBaseContext(), GameOverActivity.class);
                             i.putExtra("hallo", tempScore);
                             startActivity(i);
-
                         }
-                    }, 3000);
+                    });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
 
                 }
             }
@@ -159,6 +166,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         loop.run();
 
     }
+
 
 
     @Override

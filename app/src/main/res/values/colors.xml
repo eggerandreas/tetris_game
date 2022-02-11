@@ -9,8 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#ff669900</color>
 
+    <!--layout colors-->
     <color name="deep_aqua">#003B46</color>
     <color name="ocean">#07575B</color>
     <color name="wave">#66A5AD</color>
     <color name="sea">#C4DFE6</color>
+
 </resources>
