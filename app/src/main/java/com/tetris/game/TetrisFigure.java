@@ -5,7 +5,6 @@ import java.util.Random;
 
 enum TetrisFigureType{
 
-    // all figures in tetris
     SQUARE_SHAPED,
     T_SHAPED,
     L_SHAPED,
@@ -17,8 +16,6 @@ enum TetrisFigureType{
     private static final TetrisFigureType[] VALUES = values();
     private static final int SIZE = VALUES.length;
     private static final Random RANDOM = new Random();
-
-    // this function returns a random tetris figure
     public static TetrisFigureType getRandomTetrisFigure() {
         return VALUES[RANDOM.nextInt(SIZE)];
     }
@@ -144,7 +141,6 @@ public class TetrisFigure {
     void performClockWiseRotation() {
 
         SimpleBlock referenceBlock = blocks[0];
-
         for (SimpleBlock block : blocks) {
             Coordinate baseCoordinate = Coordinate.sub(block.coordinate, referenceBlock.coordinate);
             block.coordinate = Coordinate.add(Coordinate.rotateAntiClock(baseCoordinate), referenceBlock.coordinate);

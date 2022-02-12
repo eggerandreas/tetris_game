@@ -10,7 +10,6 @@ public class GameState {
     boolean pause;
     SimpleBlock [][] board;
     TetrisFigure falling;
-    boolean difficultMode;
     private int rows;
     private int columns;
     private Integer ctr;
@@ -24,7 +23,6 @@ public class GameState {
         ctr = 0;
         score = 0;
         this.status = true;
-        difficultMode = false;
 
         board = new SimpleBlock[rows][columns];
         for (int row = 0; row < rows; row++) {
@@ -67,7 +65,6 @@ public class GameState {
         return true;
     }
 
-    // this function moves the tetris figure down
     boolean moveFallingTetrisFigureDown() {
 
         if (canTetrisFigureDisplace(falling, new Coordinate(1, 0))) {
@@ -79,7 +76,6 @@ public class GameState {
 
     }
 
-    // this function moves the tetris figure left
     boolean moveFallingTetrisFigureLeft() {
 
         if (canTetrisFigureDisplace(falling, new Coordinate(0, -1))) {
@@ -90,7 +86,6 @@ public class GameState {
         }
     }
 
-    // this function moves the tetris figure right
     boolean moveFallingTetrisFigureRight() {
 
         if (canTetrisFigureDisplace(falling, new Coordinate(0, 1))) {
@@ -101,7 +96,7 @@ public class GameState {
         }
     }
 
-    // this function rotates the tetris figure anti clockwise
+
     boolean rotateFallingTetrisFigureAntiClock() {
         if (falling.type != TetrisFigureType.SQUARE_SHAPED) {
             for (SimpleBlock block : falling.blocks) {
@@ -119,7 +114,6 @@ public class GameState {
         return true;
     }
 
-    // this figure paints the tetris figure
     void paintTetrisFigure(TetrisFigure tetrisFigure) {
         for (SimpleBlock block : tetrisFigure.blocks) {
             if (block.state == SimpleBlockState.ON_EMPTY)
@@ -290,7 +284,6 @@ public class GameState {
         ctr = 0;
         score = 0;
         this.status = true;
-        difficultMode = false;
 
         board = new SimpleBlock[rows][columns];
         for (int row = 0; row < rows; row++) {

@@ -50,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // set sound during playing
         tetris_sound= MediaPlayer.create(GameActivity.this, R.raw.tetris);
         tetris_sound.setLooping(true); // Set looping
         tetris_sound.setVolume(100, 100);
@@ -66,7 +67,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         // config the used views
         tetrisView = findViewById(R.id.tetris_view);
-
 
         // button move left
         left = findViewById(R.id.button_left);
@@ -101,6 +101,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 turn.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.deep_aqua));
                 pause.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.wave));
                 pause.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                break;
 
             default:
                 break;
@@ -122,12 +123,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int difficulty = i.getIntExtra("difficulty", 0);
 
         // set the speed of the game based on the difficulty
-        if (difficulty == 2 && !gameState.difficultMode) {
+        if (difficulty == 2) {
             delay = delay/delayFactor;
-            gameState.difficultMode = true;
         } else {
             delay = delay * delayFactor;
-            gameState.difficultMode = false;
         }
         
         handler = new Handler(Looper.getMainLooper());
@@ -142,6 +141,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
                             gameState.pushNewTetrisFigure(TetrisFigureType.getRandomTetrisFigure());
 
+                            // make game faster
                             if (gameState.score % 10 == 9 && delay >= delayLowerLimit) {
                                 delay = delay / delayFactor + 1;
                             }
